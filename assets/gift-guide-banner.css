@@ -10,7 +10,7 @@
 
 /*top bar*/
 
-.gg-banner__top-bar{
+.gg-banner__topbar{
     display: flex;
     align-items: stretch;
     background-color: #ffffff;
@@ -88,8 +88,12 @@
 .gg-banner__content{
     position: relative;
     z-index: 1;
+    /* The gutter is an offset from the viewport edge, so it belongs on the
+       margin. Using padding here would eat into max-width, because Dawn
+       sets box-sizing: border-box globally. */
     max-width: 28rem;
-    padding: 0 var(--gg-gutter) 4.5rem;
+    margin-inline-start: var(--gg-gutter);
+    padding-bottom: 4.5rem;
 }
 
 .gg-banner__heading{
@@ -102,9 +106,141 @@
 
 .gg-banner__subheading{
     margin: 0 0 2.5rem;
-    font-size: c0.875rem;
+    font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.7;
 }
 
+
+/*animated CTA*/
+
+.gg-banner__cta{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.875rem 2rem;
+    border: 1px solid var(--gg-ink);
+    background-color: var(--gg-ink);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+
+.gg-banner__cta::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: #ffffff;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gg-banner__cta:hover,
+.gg-banner__cta:focus-visible{
+    color: var(--gg-ink);
+}
+
+.gg-banner__cta:hover::before,
+.gg-banner__cta:focus-visible::before{
+    transform: scaleX(1);
+}
+
+.gg-banner__cta .gg-banner__arrow{
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gg-banner__cta:hover .gg-banner__arrow,
+.gg-banner__cta:focus-visible .gg-banner__arrow{
+    transform: translateX(0.375rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gg-banner__cta::before,
+    .gg-banner__arrow{
+        transition: none;
+    }
+}
+
+/*strapline*/
+
+.gg-banner__strip{
+    margin: 0;
+    padding: 0.9rem 1.25rem;
+    background-color: var(--gg-strip-bg);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/*mobile*/
+
+@media screen and (max-width: 749px){
+    .gg-banner{
+        --gg-gutter: 1.25rem;
+    }
+
+.gg-banner__topbar-text,
+.gg-banner__topbar-cta{
+    display: none;  /*hide on mobile*/
+}
+
+.gg-banner__logo{
+    justify-content: center;
+    width: 100%;
+    padding-block: 1rem;
+}
+
+.gg-banner__hero{
+    display: block;
+    min-height: 0;
+}
+
+.gg-banner__media{
+    position: static;
+}
+
+.gg-banner__bg{
+    height: auto;
+}
+
+.gg-banner__content{
+    max-width: none;
+    margin-inline-start: 0;
+    padding: 2rem var(--gg-gutter) 4.5rem;
+    text-align: center;
+}
+
+.gg-banner__heading{
+    font-size: 1.5rem;
+    font-weight: 600;
+
+}
+
+.gg-banner__subheading{
+    margin-bottom:0;
+    font-size: 0.75rem;
+}
+
+/*float the button over the illustration on mobile*/
+
+.gg-banner__cta{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 1.5rem;
+}
+
+}   /* end mobile */
 
