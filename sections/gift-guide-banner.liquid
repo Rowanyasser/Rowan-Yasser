@@ -1,6 +1,19 @@
 {{ 'gift-guide-banner.css' | asset_url | stylesheet_tag }}
 
-<section class="gg-banner" style="--gg-yellow: {{ section.settings.accent_color }};">
+{%- comment -%} Load the chosen font in the weights this section uses. {%- endcomment -%}
+{% style %}
+  {{ section.settings.section_font | font_face: font_display: 'swap' }}
+  {{ section.settings.section_font | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
+  {{ section.settings.section_font | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+{% endstyle %}
+
+<section
+  class="gg-banner"
+  style="
+    --gg-yellow: {{ section.settings.accent_color }};
+    --gg-banner-font: {{ section.settings.section_font.family }}, {{ section.settings.section_font.fallback_families }};
+  "
+>
     {%- if section.settings.show_topbar -%}
     <div class="gg-banner__topbar">
         <p class="gg-banner__logo">{{section.settings.logo_text | escape}} </p>
@@ -36,7 +49,11 @@
             <h1 class="gg-banner__heading">{{ section.settings.heading | escape }}</h1>
 
             {%- if section.settings.subheading != blank -%}
-                <p class="gg-banner__subheading">{{ section.settings.subheading | escape }}</p>
+                <p class="gg-banner__subheading gg-banner__subheading--desktop">{{ section.settings.subheading | escape }}</p>
+            {%- endif -%}
+
+            {%- if section.settings.subheading_mobile != blank -%}
+                <p class="gg-banner__subheading gg-banner__subheading--mobile">{{ section.settings.subheading_mobile | escape }}</p>
             {%- endif -%}
 
             {%- if section.settings.button_label != blank -%}
@@ -49,7 +66,11 @@
     </div>
 
     {%- if section.settings.strip_text != blank -%}
-        <p class="gg-banner__strip">{{ section.settings.strip_text | escape }}</p>
+        <p class="gg-banner__strip gg-banner__strip--desktop">{{ section.settings.strip_text | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.strip_text_mobile != blank -%}
+        <p class="gg-banner__strip gg-banner__strip--mobile">{{ section.settings.strip_text_mobile | escape }}</p>
     {%- endif -%}
 </section>
 
@@ -77,6 +98,12 @@
       "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
     },
     {
+      "type": "textarea",
+      "id": "subheading_mobile",
+      "label": "Subheading (mobile)",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
+    },
+    {
       "type": "text",
       "id": "button_label",
       "label": "Button label",
@@ -92,6 +119,12 @@
       "id": "strip_text",
       "label": "Strapline",
       "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    },
+    {
+      "type": "text",
+      "id": "strip_text_mobile",
+      "label": "Strapline (mobile)",
+      "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
     },
     {
       "type": "header",
@@ -125,6 +158,12 @@
       "type": "url",
       "id": "topbar_button_link",
       "label": "Top bar button link"
+    },
+    {
+      "type": "font_picker",
+      "id": "section_font",
+      "label": "Section font",
+      "default": "poppins_n4"
     },
     {
       "type": "color",
