@@ -1,0 +1,23 @@
+{
+    "sections":{
+        "banner": {
+            "type": "gift-guide-banner",
+            "settings": {
+                "logo_text": "TISSO VISION",
+                "heading": "The Gift Guide",
+                "subheading": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+                "button_label": "SHOP NOW",
+                "button_link": "/collections/all",
+                "strip_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL ",
+                "show_topbar": true,
+                "topbar_text": "Find the ideal gift for your loved ones.",
+                "topbar_button_label": "CHOOSE GIFT",
+                "topbar_button_link": "/collections/all",
+                "accent_color": "#f5e31f"
+            }
+        }
+        },
+        "order": [
+            "banner"
+        ]
+    }

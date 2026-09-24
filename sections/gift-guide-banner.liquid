@@ -1,0 +1,21 @@
+{{ 'gift-guide-banner.css' | asset_url | stylesheet_tag }}
+
+<section class="gg-banner">
+  <h1 class="gg-banner__heading">{{ section.settings.heading }}</h1>
+</section>
+
+{% schema %}
+{
+  "name": "Gift Guide Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gift Guide"
+    }
+  ],
+  "presets": [{ "name": "Gift Guide Banner" }]
+}
+{% endschema %}
