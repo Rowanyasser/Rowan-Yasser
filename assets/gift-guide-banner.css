@@ -22,7 +22,7 @@
     align-items: center;
     padding-inline: var(--gg-gutter);
     margin:0;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -34,19 +34,19 @@
     align-items: center;
     justify-content: center;
     margin: 0;
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1.5;
 }
 
 .gg-banner__topbar-cta{
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
-    gap: 1.25rem;
-    padding: 1.125rem 2rem;
+    gap: 2rem;
+    padding: 1.4rem 3rem;
     background-color: var(--gg-yellow);
     color: var(--gg-ink);
-    font-size: 0.75rem;
+    font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-decoration: none;
@@ -68,7 +68,7 @@
     position: relative;
     display: flex;
     align-items: flex-end;
-    min-height: min(76vh, 46rem);
+    min-height: min(76vh, 77rem);
     overflow: hidden;
     background-color: #ffffff;
 }
@@ -88,27 +88,31 @@
 .gg-banner__content{
     position: relative;
     z-index: 1;
-    /* The gutter is an offset from the viewport edge, so it belongs on the
-       margin. Using padding here would eat into max-width, because Dawn
-       sets box-sizing: border-box globally. */
-    max-width: 28rem;
+    max-width: 48rem;
     margin-inline-start: var(--gg-gutter);
-    padding-bottom: 4.5rem;
+    padding-bottom: 8.8rem;
 }
 
 .gg-banner__heading{
-    margin: 0 0 1.5rem;
-    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    margin: 0 0 2.4rem;
+    font-size: clamp(3.6rem, 4vw, 5.6rem);
     font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.01em;
 }
 
 .gg-banner__subheading{
-    margin: 0 0 2.5rem;
-    font-size: 0.875rem;
+    margin: 0 0 4rem;
+    font-size: 1.4rem;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.5;
+}
+
+/* The design uses shorter copy on mobile, so each variant is hidden at the
+   other breakpoint. display: none also keeps it out of the a11y tree. */
+.gg-banner__subheading--mobile,
+.gg-banner__strip--mobile{
+    display: none;
 }
 
 
@@ -118,12 +122,12 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 1.25rem;
-    padding: 0.875rem 2rem;
+    gap: 2.4rem;
+    padding: 1.7rem 2.4rem;
     border: 1px solid var(--gg-ink);
     background-color: var(--gg-ink);
     color: #ffffff;
-    font-size: 0.75rem;
+    font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-decoration: none;
@@ -174,9 +178,9 @@
 
 .gg-banner__strip{
     margin: 0;
-    padding: 0.9rem 1.25rem;
+    padding: 1.5rem 2rem;
     background-color: var(--gg-strip-bg);
-    font-size: 0.75rem;
+    font-size: 1.1rem;
     font-weight: 400;
     letter-spacing: 0.05em;
     text-align: center;
@@ -187,18 +191,28 @@
 
 @media screen and (max-width: 749px){
     .gg-banner{
-        --gg-gutter: 1.25rem;
+        --gg-gutter: 2rem;
     }
 
 .gg-banner__topbar-text,
-.gg-banner__topbar-cta{
+.gg-banner__topbar-cta,
+.gg-banner__subheading--desktop,
+.gg-banner__strip--desktop{
     display: none;  /*hide on mobile*/
+}
+
+.gg-banner__subheading--mobile{
+    display: block;
+}
+
+.gg-banner__strip--mobile{
+    display: block;
 }
 
 .gg-banner__logo{
     justify-content: center;
     width: 100%;
-    padding-block: 1rem;
+    padding-block: 1.6rem;
 }
 
 .gg-banner__hero{
@@ -217,19 +231,19 @@
 .gg-banner__content{
     max-width: none;
     margin-inline-start: 0;
-    padding: 2rem var(--gg-gutter) 4.5rem;
+    padding: 3.2rem var(--gg-gutter) 2rem;
     text-align: center;
 }
 
 .gg-banner__heading{
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     font-weight: 600;
-
+    margin-bottom: 1.6rem;
 }
 
 .gg-banner__subheading{
     margin-bottom:0;
-    font-size: 0.75rem;
+    font-size: 1.2rem;
 }
 
 /*float the button over the illustration on mobile*/
