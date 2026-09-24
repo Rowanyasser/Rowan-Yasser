@@ -29,8 +29,8 @@
     {%- endif -%}
 
     <div class="gg-banner__hero">
-        {%- if section.settings.background_image != blank -%}
             <div class="gg-banner__media">
+                {%- if section.settings.background_image != blank -%}
                 {{
                     section.settings.background_image
                     | image_url: width: 2400
@@ -39,11 +39,22 @@
                         loading: 'eager',
                         fetchpriority: 'high',
                         sizes: '100vw',
-                        widths: '600, 900, 1200, 1800, 2400',
+                        widths: '600,900,1200,1800,2400',
                         alt: ''
                 }}
+            {%- else -%}
+                <img 
+                    class="gg-banner__bg"
+                    src="{{'gift-guide-artwork.png'| asset_url}}"
+                    alt=""
+                    width="1440"
+                    height="780"
+                    loading="eager"
+                    fetchpriority="high"
+                >
+
+            {%- endif -%}
             </div>
-        {%- endif -%}
 
         <div class="gg-banner__content">
             <h1 class="gg-banner__heading">{{ section.settings.heading | escape }}</h1>

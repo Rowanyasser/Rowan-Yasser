@@ -68,7 +68,9 @@
     position: relative;
     display: flex;
     align-items: flex-end;
-    min-height: min(76vh, 77rem);
+    /* Matches the artwork so cover neither crops nor shifts the blank area
+       the copy sits in. */
+    aspect-ratio: 1440 / 780;
     overflow: hidden;
     background-color: #ffffff;
 }
@@ -119,6 +121,8 @@
 /*animated CTA*/
 
 .gg-banner__cta{
+    --gg-cta-fill: #ffffff;
+
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -142,7 +146,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-color: #ffffff;
+    background-color: var(--gg-cta-fill);
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -217,7 +221,7 @@
 
 .gg-banner__hero{
     display: block;
-    min-height: 0;
+    aspect-ratio: auto;
 }
 
 .gg-banner__media{
