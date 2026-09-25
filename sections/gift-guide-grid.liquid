@@ -1,0 +1,112 @@
+{{'gift-guide-grid.css' | asset_url | stylesheet_tag}}
+
+{% style %}
+    {{section.settings.section_font | font_face: font_display: 'swap'}}
+{% endstyle %}
+
+<section
+    class="gg-grid"
+    style="--gg-grid-font: {{section.settings.section_font.family}}, {{section.settings.section_font.fallback_families}};"
+>
+
+    <h2 class="gg-grid__heading">{{ section.settings.heading | escape}}</h2>
+
+    <ul class="gg-grid__list" role="list">
+        {%- for block in section.blocks -%}
+            {%- assign item = block.settings.product -%}
+
+            {%- if item!=blank -%}
+                <li class="gg-grid__item" {{ block.shopify_attributes }}>
+                    {{
+                        item.featured_image
+                        | image_url: width: 1200
+                        | image_tag: 
+                            class: 'gg-grid__image',
+                            loading:'lazy',
+                            sizes: '(min-width: 750px) 33vw, 50vw',
+                            widths: '300,500,900,1200',
+                            alt: item.title
+                    }}
+
+                    <button
+                        class="gg-grid__hotspot"
+                        type="button"
+                        style="--gg-hotspot-x: {{block.settings.hotspot_x}}%; --gg-hotspot-y: {{block.settings.hotspot_y}}%;"
+                        aria-label="Quick view: {{item.title | escape}}"
+                        data-product-handle="{{item.handle}}"
+                    >
+                        <span aria-hidden="true">+</span>
+
+                    </button>
+                </li>
+            {%- endif -%}
+        {%- endfor -%}
+    </ul>
+</section>
+
+{%  schema %}
+{
+    "name": "Gift Guide Grid",
+    "tag": "section",
+    "enabled_on": {"templates": ["page"]},
+    "max_blocks":6,
+    "settings":[
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default":"Tisso vison in the wild"
+        },
+        {
+            "type": "font_picker",
+            "id":"section_font",
+            "label": "Section font",
+            "default": "poppins_n4"
+        }
+    ],
+    "blocks":[
+        {
+            "type": "product",
+            "name": "Product",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                },
+                {
+                    "type":"range",
+                    "id": "hotspot_x",
+                    "label": "Marker position X",
+                    "min": 0,
+                    "max": 100,
+                    "step":1,
+                    "unit": "%",
+                    "default":50
+                },
+                {
+                    "type":"range",
+                    "id": "hotspot_y",
+                    "label": "Marker position Y",
+                    "min": 0,
+                    "max": 100,
+                    "step":1,
+                    "unit": "%",
+                    "default":50
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Gift Guide Grid",
+            "blocks":[
+                {"type":"product"},{"type":"product"},{"type":"product"},
+                {"type":"product"},{"type":"product"},{"type":"product"}
+
+            ]
+        }
+    ]
+}
+
+{% endschema %}

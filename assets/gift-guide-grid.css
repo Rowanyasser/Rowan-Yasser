@@ -1,0 +1,87 @@
+.gg-grid{
+    --gg-ink: #111111;
+    --gg-gutter: 8.75vw;
+    padding: 6.25rem var(--gg-gutter);
+    background-color: #ffffff;
+    color: var(--gg-ink);
+    font-family: var(--gg-grid-font, "Poppins", "Helvetica Neue", Arial, sans-serif);
+}
+
+.gg-grid__heading{
+    margin: 0 0 3.125rem;
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+.gg-grid__list{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.gg-grid__item{
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+
+.gg-grid__image{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* marker positioning */
+
+.gg-grid__hotspot{
+    position: absolute;
+    top: var(--gg-hotspot-y, 50%);
+    left: var(--gg-hotspot-x, 50%);
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: var(--gg-ink);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.gg-grid__hotspot:hover,
+.gg-grid__hotspot:focus-visible{
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+@media (prefers-reduced-motion: reduce){
+    .gg-grid__hotspot{
+        transition: none;
+    }
+}
+
+@media screen and (max-width: 749px){
+    .gg-grid{
+        --gg-gutter: 2rem;
+        padding: 3.2rem var(--gg-gutter);
+    }
+
+    .gg-grid__heading{
+        margin-bottom: 2.4rem;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .gg-grid__list{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+}
