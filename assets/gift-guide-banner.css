@@ -66,8 +66,6 @@
 
 .gg-banner__hero{
     position: relative;
-    display: flex;
-    align-items: flex-end;
     /* Matches the artwork so cover neither crops nor shifts the blank area
        the copy sits in. */
     aspect-ratio: 1440 / 780;
@@ -87,25 +85,27 @@
     object-position: center;
 }
 
+/* Placed by percentage so the copy keeps its position within the artwork
+   at any viewport width. Values come from the 1440x780 design. */
 .gg-banner__content{
-    position: relative;
+    position: absolute;
     z-index: 1;
-    max-width: 48rem;
-    margin-inline-start: var(--gg-gutter);
-    padding-bottom: 8.8rem;
+    left: 9%;
+    top: 59%;
+    width: 33%;
 }
 
 .gg-banner__heading{
-    margin: 0 0 2.4rem;
-    font-size: clamp(3.6rem, 4vw, 5.6rem);
+    margin: 0 0 1.67vw;
+    font-size: 3.89vw;
     font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.01em;
 }
 
 .gg-banner__subheading{
-    margin: 0 0 4rem;
-    font-size: 1.4rem;
+    margin: 0 0 2.78vw;
+    font-size: 0.97vw;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -121,17 +121,17 @@
 /*animated CTA*/
 
 .gg-banner__cta{
-    --gg-cta-fill: #ffffff;
+    --gg-cta-fill: var(--gg-yellow);
 
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 2.4rem;
-    padding: 1.7rem 2.4rem;
+    gap: 2.22vw;
+    padding: 1.18vw 1.67vw;
     border: 1px solid var(--gg-ink);
     background-color: var(--gg-ink);
     color: #ffffff;
-    font-size: 1.2rem;
+    font-size: 0.83vw;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-decoration: none;
@@ -233,8 +233,8 @@
 }
 
 .gg-banner__content{
-    max-width: none;
-    margin-inline-start: 0;
+    position: static;
+    width: auto;
     padding: 3.2rem var(--gg-gutter) 2rem;
     text-align: center;
 }
@@ -247,6 +247,12 @@
 
 .gg-banner__subheading{
     margin-bottom:0;
+    font-size: 1.2rem;
+}
+
+.gg-banner__cta{
+    gap: 1.6rem;
+    padding: 1.4rem 2rem;
     font-size: 1.2rem;
 }
 

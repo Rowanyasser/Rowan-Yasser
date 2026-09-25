@@ -6,6 +6,7 @@
 
 <section
     class="gg-grid"
+    data-currency="{{ cart.currency.iso_code }}"
     style="--gg-grid-font: {{section.settings.section_font.family}}, {{section.settings.section_font.fallback_families}};"
 >
 
@@ -38,10 +39,59 @@
                         <span aria-hidden="true">+</span>
 
                     </button>
+
+                    {%- comment -%} Only the fields the popup needs, rather than the whole product. {%- endcomment -%}
+                    <script type="application/json" data-gg-product="{{ item.handle }}">
+                        {
+                            "title": {{ item.title | json }},
+                            "handle": {{ item.handle | json }},
+                            "description": {{ item.description | json }},
+                            "featured_image": {{ item.featured_image | image_url: width: 400 | json }},
+                            "price": {{ item.price | json }},
+                            "options": {{ item.options | json }},
+                            "variants": [
+                                {%- for variant in item.variants -%}
+                                    {
+                                        "id": {{ variant.id | json }},
+                                        "available": {{ variant.available | json }},
+                                        "price": {{ variant.price | json }},
+                                        "options": {{ variant.options | json }}
+                                    }{%- unless forloop.last -%},{%- endunless -%}
+                                {%- endfor -%}
+                            ]
+                        }
+                    </script>
                 </li>
             {%- endif -%}
         {%- endfor -%}
     </ul>
+
+    <div class="gg-popup" data-gg-popup hidden>
+        <div class="gg-popup__backdrop" data-gg-close></div>
+        <div class="gg-popup__dialog" role="dialog" aria-modal="true" aria-labelledby="gg-popup-title-{{section.id}}">
+            <button class="gg-popup__close" type="button" data-gg-close aria-label="Close">&times;</button>
+
+            <div class="gg-popup__head">
+                <img class="gg-popup__image" src="" alt="" width="88" height="110">
+                <div>
+                    <h3 class="gg-popup__title" id="gg-popup-title-{{section.id}}"></h3>
+                    <p class="gg-popup__price"></p>
+                </div>
+            </div>
+
+            <div class="gg-popup__description"></div>
+            <form class="gg-popup__form" data-gg-form>
+                <div class="gg-popup__options" data-gg-options></div>
+                <button class="gg-popup__submit" type="submit">
+                    ADD TO CART
+                    <span aria-hidden="true">&#10230;</span>
+                </button>
+
+                <p class="gg-popup__message" role="status" data-gg-message></p>
+            </form>
+        </div>
+    </div>
+    <script src="{{ 'gift-guide-grid.js' | asset_url }}" defer></script>
 </section>
 
 {%  schema %}
