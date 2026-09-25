@@ -3,21 +3,61 @@
         "banner": {
             "type": "gift-guide-banner",
             "settings": {
-                "logo_text": "TISSO VISION",
+                "logo_text": "TISSO VISON",
                 "heading": "The Gift Guide",
                 "subheading": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
                 "button_label": "SHOP NOW",
                 "button_link": "/collections/all",
-                "strip_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL ",
+                "subheading_mobile": "Discover Joy: Your Ultimate Holiday Gift Destination",
+                "strip_text_mobile": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR",
                 "show_topbar": true,
                 "topbar_text": "Find the ideal gift for your loved ones.",
                 "topbar_button_label": "CHOOSE GIFT",
                 "topbar_button_link": "/collections/all",
                 "accent_color": "#f5e31f"
             }
-        }
         },
+        "grid":{
+            "type": "gift-guide-grid",
+            "blocks":{
+                "p1":{
+                    "type":"product",
+                    "settings":{
+                        "product": "black-leather-bag","hotspot_x": 62,"hotspot_y": 52}},
+                "p2":{
+                    "type":"product",
+                    "settings":{
+                        "product": "blue-silk-tuxedo","hotspot_x": 55,"hotspot_y": 49}},
+                "p3":{
+                    "type":"product",
+                    "settings":{
+                        "product": "chequered-red-shirt","hotspot_x": 57,"hotspot_y": 25}},
+                "p4":{
+                    "type":"product",
+                    "settings":{
+                        "product": "classic-leather-jacket","hotspot_x": 55,"hotspot_y": 20}},
+                "p5":{
+                    "type":"product",
+                    "settings":{
+                        "product": "classic-varsity-top","hotspot_x": 50,"hotspot_y": 43}},
+                "p6":{
+                    "type":"product",
+                    "settings":{
+                        "product": "dark-denim-top","hotspot_x": 62,"hotspot_y": 52}}
+                    },
+                    "block_order": [
+                        "p1",
+                        "p2",
+                        "p3",
+                        "p4",
+                        "p5",
+                        "p6"
+                    ],
+                    "settings": {
+                        "heading": "Tisso vison in the wild"}
+                }
+            },
         "order": [
-            "banner"
+            "banner","grid"
         ]
     }
