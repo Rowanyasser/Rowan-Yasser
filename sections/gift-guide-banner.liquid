@@ -3,6 +3,7 @@
 {%- comment -%} Load the chosen font in the weights this section uses. {%- endcomment -%}
 {% style %}
   {{ section.settings.section_font | font_face: font_display: 'swap' }}
+  {{ section.settings.section_font | font_modify: 'weight', '300' | font_face: font_display: 'swap' }}
   {{ section.settings.section_font | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
   {{ section.settings.section_font | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
 {% endstyle %}
@@ -174,7 +175,7 @@
       "type": "font_picker",
       "id": "section_font",
       "label": "Section font",
-      "default": "poppins_n4"
+      "default": "jost_n4"
     },
     {
       "type": "color",

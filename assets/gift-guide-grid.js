@@ -2,6 +2,10 @@ class GiftGuideGrid{
     /* Handle differs from the title: "Soft Winter Jacket" lives at dark-winter-jacket. */
     static BONUS_HANDLE = 'dark-winter-jacket';
     static BONUS_WHEN = {color: 'black', size: 'm'};
+    /* Display order in the popup, regardless of how the product stores them. */
+    static OPTION_ORDER = ['color', 'size'];
+    /* Value order within an option, where the design specifies one. */
+    static VALUE_ORDER = { color: ['white', 'black'] };
 
     constructor(root) {
         this.root = root;
@@ -65,11 +69,36 @@ class GiftGuideGrid{
 
     }
 
+    sortValues(name, values) {
+        const order = GiftGuideGrid.VALUE_ORDER[name.toLowerCase()];
+        if (!order) return values;
+
+        const rank = (value) => {
+            const i = order.indexOf(String(value).toLowerCase());
+            return i === -1 ? order.length : i;
+        };
+
+        return [...values].sort((a, b) => rank(a) - rank(b));
+    }
+
+    /* The design shows Color before Size; the product stores them the other way round. */
+    orderedOptions() {
+        const order = GiftGuideGrid.OPTION_ORDER;
+        const rank = (name) => {
+            const i = order.indexOf(name.toLowerCase());
+            return i === -1 ? order.length : i;
+        };
+
+        return this.product.options
+            .map((name, index) => ({ name, index }))
+            .sort((a, b) => rank(a.name) - rank(b.name));
+    }
+
     /*any product with any set of options should render correctly*/
     renderOptions() {
         this.optionsHost.innerHTML = '';
-        this.product.options.forEach((name, index) => {
-            const values = [...new Set(this.product.variants.map((v) => v.options[index]))];
+        this.orderedOptions().forEach(({ name, index }) => {
+            const values = this.sortValues(name, [...new Set(this.product.variants.map((v) => v.options[index]))]);
             const field=document.createElement('div');
             field.classList.add('gg-popup__option');
             const label=document.createElement('span');
@@ -143,7 +172,7 @@ class GiftGuideGrid{
         this.message.textContent = '';
     }
 
-    /*prices returned from Shopify are in cents, so we need to divide by 100 and format as currency*/
+    /* Shopify returns prices in cents. */
     money(cents) {
         return new Intl.NumberFormat(document.documentElement.lang || 'en', {style: 'currency', currency: this.currency}).format(cents/100);}
 
@@ -194,12 +223,25 @@ class GiftGuideGrid{
                 return null;
             }
         }
+        /* Re-rendered rather than patched, because an empty cart has no count bubble to patch. */
         async updateCartCount() {
-            try{
-                const cart = await (await fetch('/cart.js')).json();
-                document.querySelectorAll('.cart-count-bubble span[aria-hidden="true"]').forEach((node) => {
-                    node.textContent = cart.item_count;
-                });
+            const icon = document.querySelector('#cart-icon-bubble');
+            if (!icon) return;
+
+            try {
+                const response = await fetch('/?sections=cart-icon-bubble');
+                if (!response.ok) return;
+
+                const sections = await response.json();
+                const markup = sections['cart-icon-bubble'];
+                if (!markup) return;
+
+                /* The rendered section arrives wrapped in .shopify-section. */
+                const fresh = new DOMParser()
+                    .parseFromString(markup, 'text/html')
+                    .querySelector('.shopify-section');
+
+                if (fresh) icon.innerHTML = fresh.innerHTML;
             } catch (error) {
                 console.error(error);
             }

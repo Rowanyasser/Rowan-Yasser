@@ -5,7 +5,7 @@
     --gg-gutter: 8.75vw;
 
     color: var(--gg-ink);
-    font-family: var(--gg-banner-font, "Poppins", "Helvetica Neue", Arial, sans-serif);
+    font-family: var(--gg-banner-font, "Jost", "Helvetica Neue", Arial, sans-serif);
 }
 
 /*top bar*/
@@ -66,8 +66,7 @@
 
 .gg-banner__hero{
     position: relative;
-    /* Matches the artwork so cover neither crops nor shifts the blank area
-       the copy sits in. */
+    /* Matches the artwork so cover never crops it. */
     aspect-ratio: 1440 / 780;
     overflow: hidden;
     background-color: #ffffff;
@@ -85,8 +84,7 @@
     object-position: center;
 }
 
-/* Placed by percentage so the copy keeps its position within the artwork
-   at any viewport width. Values come from the 1440x780 design. */
+/* Percentages from the 1440x780 design, so the copy holds its place at any width. */
 .gg-banner__content{
     position: absolute;
     z-index: 1;
@@ -110,8 +108,7 @@
     line-height: 1.5;
 }
 
-/* The design uses shorter copy on mobile, so each variant is hidden at the
-   other breakpoint. display: none also keeps it out of the a11y tree. */
+/* The design uses shorter copy on mobile, so each variant hides at the other breakpoint. */
 .gg-banner__subheading--mobile,
 .gg-banner__strip--mobile{
     display: none;
