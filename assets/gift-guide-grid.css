@@ -206,7 +206,7 @@
     cursor: pointer;
 }
 
-.popup__swatch[aria-checked="true"]{
+.gg-popup__swatch[aria-pressed="true"]{
     border-left: 3px solid var(--gg-ink);
 }
 
